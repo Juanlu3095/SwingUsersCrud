@@ -1,0 +1,4 @@
+build
+lib
+.env
+nbproject/private/

@@ -1,0 +1,22 @@
+
+import Controllers.UserController;
+import Database.Connection;
+import Models.UserModel;
+import io.github.cdimascio.dotenv.Dotenv;
+
+public class SwingUsersCrud {
+    public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASS");
+        int port = Integer.parseInt(dotenv.get("DB_PORT"));
+        String host = dotenv.get("DB_HOST");
+        String db = dotenv.get("DB_NAME");
+        
+        Connection connection = new Connection(user, password, port, host, db);
+        UserModel userModel = new UserModel(connection);
+        new UserController(userModel).index();
+        
+        // Crear aqui un controlador y se le pasa el modelo y el objeto connection directamente
+    }
+}

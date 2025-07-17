@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SwingUsersCrud" default="mysql" basedir=".">
+    <description>Builds, tests, and runs the project SwingUsersCrud.</description>
+    <import file="nbproject/build-impl.xml"/>
+    
+    <target name="ivy" description="Install ivy.jar">
+        <mkdir dir="./lib" />
+        <get dest="./lib" src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.5.3/ivy-2.5.3.jar" />
+        <echo>ivy.jar descargado correctamente.</echo>
+    </target>
+    
+    <target name="install" description="Instala las dependencias del proyecto">
+        <mkdir dir="./lib" />
+        
+        <get dest="./lib" src="https://repo1.maven.org/maven2/io/github/cdimascio/dotenv-java/3.2.0/dotenv-java-3.2.0.jar" />
+        <get dest="./lib" src="https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/9.3.0/mysql-connector-j-9.3.0.jar" />
+        <get dest="./lib" src="https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar" />
+        <get dest="./lib" src="https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" />
+        
+        <echo>Dependencias descargadas correctamente.</echo>
+    </target>
+
+</project>
+<!-- https://medium.com/recetario/construcci%C3%B3n-de-una-aplicaci%C3%B3n-en-java-e8be16fe46e3 -->
+<!-- https://stackoverflow.com/questions/4542529/how-to-include-external-libraries-in-ant-build-xml-file -->
