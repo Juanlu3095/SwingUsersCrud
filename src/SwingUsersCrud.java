@@ -2,6 +2,7 @@
 import Controllers.UserController;
 import Database.Connection;
 import Models.UserModel;
+import Views.ListaUsuarios;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class SwingUsersCrud {
@@ -15,8 +16,8 @@ public class SwingUsersCrud {
         
         Connection connection = new Connection(user, password, port, host, db);
         UserModel userModel = new UserModel(connection);
-        new UserController(userModel).index();
+        ListaUsuarios listaUsuarios = new ListaUsuarios();
+        new UserController(userModel, listaUsuarios).index();
         
-        // Crear aqui un controlador y se le pasa el modelo y el objeto connection directamente
     }
 }

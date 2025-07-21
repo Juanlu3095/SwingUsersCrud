@@ -4,49 +4,28 @@ package Views;
 import Entities.User;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import Interfaces.UserListViewInterface;
 
-public class ListaUsuarios extends javax.swing.JFrame {
+public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInterface {
 
-    private ArrayList<User> users;
     /**
      * Creates new form ListaUsuarios
      */
-    public ListaUsuarios(ArrayList<User> users) {
-        this.users = users;
+    public ListaUsuarios() {
         initComponents();
-        this.showUsers();
         
-        this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
     
-    public void showUsers() {
-        String[] columnNames = {"id", "Nombre", "Apellidos", "Email", "DNI"}; // Nombre de las columnas para la tabla de usuarios
-        DefaultTableModel model = new DefaultTableModel(null, columnNames){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-            
-        }; 
-        
-        for(User user : users) { // Bucle ForEach para obtener los datos de un array
-            // Array que contiene los datos de cada fila conforme avanzamos en el bucle for.
-            Object[] data = new Object[columnNames.length]; // Al ser un array, le ponemos la longitud de las columnas para que aumente dinámicamente
-            
-            // Le damos valores a cada columna de cada fila de data:
-            data[0] = user.getId();
-            data[1] = user.getNombre();
-            data[2] = user.getApellidos();
-            data[3] = user.getEmail();
-            data[4] = user.getDni();
-            
-            model.addRow(data); // Añadimos la fila de data al model de la tabla, por eso al usar new antes le habíamos puesto null
-            // Las columnas se las añadimos al model de la tabla al usar new()
-        }
-        
-        this.Tabla.setModel(model); // Le añadimos el model a la tabla. jTableUsuarios es el nombre que le pusimos en la interfaz gráfica.
+    @Override
+    public javax.swing.JTable getTabla() {
+        return this.Tabla;
+    }
+    
+    @Override
+    public void setVisibleView (boolean option) {
+        this.setVisible(option);
     }
 
     /**
@@ -264,7 +243,7 @@ public class ListaUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel JPanelPrincipal;
     private javax.swing.JPanel Section;
     private javax.swing.JComboBox<String> SelectedFilter;
-    private javax.swing.JTable Tabla;
+    public javax.swing.JTable Tabla;
     private javax.swing.JLabel Title;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
