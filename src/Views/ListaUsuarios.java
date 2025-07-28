@@ -1,10 +1,8 @@
 
 package Views;
 
-import Entities.User;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
 import Interfaces.UserListViewInterface;
+import javax.swing.JButton;
 
 public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInterface {
 
@@ -14,8 +12,19 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     public ListaUsuarios() {
         initComponents();
         
+        this.setTitle("Lista de usuarios");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+    }
+    
+    @Override
+    public void setVisibleView (boolean option) {
+        this.setVisible(option);
+    }
+    
+    @Override
+    public void exitView() {
+        this.dispose();
     }
     
     @Override
@@ -24,8 +33,28 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     }
     
     @Override
-    public void setVisibleView (boolean option) {
-        this.setVisible(option);
+    public JButton getFilterButton() {
+        return this.ButtonFilter;
+    }
+    
+    @Override
+    public String getColumnNameFilter () {
+        return this.SelectedFilter.getSelectedItem().toString();
+    }
+    
+    @Override
+    public String getColumnValueFilter () {
+        return this.FilterValue.getText();
+    }
+    
+    @Override
+    public JButton getDeleteFilterButton() {
+        return this.ButtonDeleteFilter;
+    }
+    
+    @Override
+    public JButton getExitButton() {
+        return this.ButtonExit;
     }
 
     /**
@@ -77,12 +106,12 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
                 .addGroup(AsideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(FilterValue)
                     .addComponent(FilterTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(SelectedFilter, 0, 192, Short.MAX_VALUE))
+                    .addComponent(SelectedFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(AsideLayout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(ButtonFilter)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         AsideLayout.setVerticalGroup(
             AsideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +176,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
                 .addComponent(ButtonNewUser)
                 .addGap(18, 18, 18)
                 .addComponent(ButtonDeleteFilter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonExit)
                 .addGap(29, 29, 29))
         );
@@ -171,7 +200,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
                 .addGroup(SectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Title, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Buttons, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE))
                 .addContainerGap())
         );
         SectionLayout.setVerticalGroup(
@@ -211,9 +240,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(JPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+            .addComponent(JPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

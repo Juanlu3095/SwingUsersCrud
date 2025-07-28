@@ -5,17 +5,22 @@ import Entities.User;
 import Interfaces.UserControllerInterface;
 import Interfaces.UserListViewInterface;
 import Interfaces.UserModelInterface;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-public class UserController implements UserControllerInterface {
+public class UserController implements UserControllerInterface, ActionListener {
     private final UserModelInterface userModel;
     private final UserListViewInterface listaUsuarios;
     
     public UserController(UserModelInterface userModel, UserListViewInterface listaUsuarios) {
         this.userModel = userModel;
         this.listaUsuarios = listaUsuarios;
+        
+        this.listaUsuarios.getFilterButton().addActionListener(this);
+        this.listaUsuarios.getDeleteFilterButton().addActionListener(this);
+        this.listaUsuarios.getExitButton().addActionListener(this);
     }
     
     /**
@@ -54,6 +59,76 @@ public class UserController implements UserControllerInterface {
         this.listaUsuarios.setVisibleView(true);
     }
     
+    @Override
+    public void actionPerformed (ActionEvent e) {
+        // BOTÓN FILTRO
+        if(e.getSource() == this.listaUsuarios.getFilterButton()) {
+            ArrayList<User> users = this.filter(this.listaUsuarios.getColumnNameFilter(), this.listaUsuarios.getColumnValueFilter());
+            // Añadimos los usuarios a la tabla
+            String[] columnNames = {"id", "Nombre", "Apellidos", "Email", "DNI"}; // Nombres de las columnas de la tabla
+            DefaultTableModel model = new DefaultTableModel(null, columnNames){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+
+            for(User user : users) { // Bucle ForEach para obtener los datos de un array
+                // Array que contiene los datos de cada fila conforme avanzamos en el bucle for.
+                Object[] data = new Object[columnNames.length]; // Al ser un array, le ponemos la longitud de las columnas para que aumente dinámicamente
+
+                // Le damos valores a cada columna de cada fila de data:
+                data[0] = user.getId();
+                data[1] = user.getNombre();
+                data[2] = user.getApellidos();
+                data[3] = user.getEmail();
+                data[4] = user.getDni();
+
+                model.addRow(data); // Añadimos la fila de data al model de la tabla, por eso al usar new antes le habíamos puesto null
+            }
+
+            this.listaUsuarios.getTabla().setModel(model);
+        }
+        
+        // BOTÓN LIMPIAR FILTROS. SE DEBERÍA CREAR UN MÉTODO PARA ENVIAR EL MODELO A LA VISTA
+        else if (e.getSource() == this.listaUsuarios.getDeleteFilterButton()) {
+            System.out.println("Hola");
+            ArrayList<User> users = this.list();
+        
+            // Añadimos los usuarios a la tabla
+            String[] columnNames = {"id", "Nombre", "Apellidos", "Email", "DNI"}; // Nombres de las columnas de la tabla
+            DefaultTableModel model = new DefaultTableModel(null, columnNames){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+
+            for(User user : users) { // Bucle ForEach para obtener los datos de un array
+                // Array que contiene los datos de cada fila conforme avanzamos en el bucle for.
+                Object[] data = new Object[columnNames.length]; // Al ser un array, le ponemos la longitud de las columnas para que aumente dinámicamente
+
+                // Le damos valores a cada columna de cada fila de data:
+                data[0] = user.getId();
+                data[1] = user.getNombre();
+                data[2] = user.getApellidos();
+                data[3] = user.getEmail();
+                data[4] = user.getDni();
+
+                model.addRow(data); // Añadimos la fila de data al model de la tabla, por eso al usar new antes le habíamos puesto null
+            }
+
+            this.listaUsuarios.getTabla().setModel(model);
+        }
+        
+        // BOTÓN SALIR
+        else if(e.getSource() == this.listaUsuarios.getExitButton()) {
+            this.listaUsuarios.exitView();
+        }
+    }
+    
     /**
     * It returns a list of all users.
     * @return The list of users.
@@ -64,7 +139,6 @@ public class UserController implements UserControllerInterface {
         return users;
     }
     
-        
     /**
     * It updates an user in database.
     * @param column The name of the column in database to filter the users.

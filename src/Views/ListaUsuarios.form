@@ -23,10 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="JPanelPrincipal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
-          </Group>
+          <Component id="JPanelPrincipal" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -89,14 +86,14 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="FilterValue" max="32767" attributes="0"/>
                           <Component id="FilterTitle" alignment="1" max="32767" attributes="0"/>
-                          <Component id="SelectedFilter" alignment="1" pref="192" max="32767" attributes="0"/>
+                          <Component id="SelectedFilter" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="ButtonFilter" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="66" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -173,7 +170,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="Title" alignment="0" max="32767" attributes="0"/>
                           <Component id="Buttons" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="1" pref="666" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -250,7 +247,7 @@
                           <Component id="ButtonNewUser" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="ButtonDeleteFilter" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="345" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="ButtonExit" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
