@@ -12,6 +12,8 @@ public interface UserControllerInterface {
     
     public ArrayList<User> list();
     
+    public void addDataTable (ArrayList<User> users);
+    
     public ArrayList<User> filter ( String column, String columnValue );
     
     public User show (int id);

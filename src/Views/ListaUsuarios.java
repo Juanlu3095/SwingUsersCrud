@@ -7,7 +7,7 @@ import javax.swing.JButton;
 public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInterface {
 
     /**
-     * Creates new form ListaUsuarios
+     * Creates new JFrame ListaUsuarios
      */
     public ListaUsuarios() {
         initComponents();
@@ -55,6 +55,11 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     @Override
     public JButton getExitButton() {
         return this.ButtonExit;
+    }
+    
+    @Override
+    public JButton getNewUserButton() {
+        return this.ButtonNewUser;
     }
 
     /**

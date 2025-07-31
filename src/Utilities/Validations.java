@@ -7,10 +7,6 @@ package Utilities;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author Usuario
- */
 public class Validations {
     public static boolean validateDni (String dni) {
         if (dni.length() != 9) { // Colocar esto primero, de lo contrario, al definir letter se produce un error StringIndexOutOfBoundsException por el charAt, pues no existe ese indice si length no es 9

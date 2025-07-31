@@ -19,5 +19,7 @@ public interface UserListViewInterface {
     
     public javax.swing.JButton getDeleteFilterButton(); // Devuelve el botón para limpiar los filtros de la vista
     
-    public javax.swing.JButton getExitButton(); // Devuelve botón para salir de la aplicación
+    public javax.swing.JButton getExitButton(); // Devuelve el botón para salir de la aplicación
+    
+    public javax.swing.JButton getNewUserButton(); // Devuelve el botón para crear un nuevo usuario.
 }
