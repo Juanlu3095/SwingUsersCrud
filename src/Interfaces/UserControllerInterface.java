@@ -22,9 +22,9 @@ public interface UserControllerInterface {
     
     public boolean store(User user);
     
-    public void edit();
+    public void edit(User user);
     
-    public boolean update(int id, User user);
+    public boolean update(User user);
     
     public boolean delete (int id);
 }

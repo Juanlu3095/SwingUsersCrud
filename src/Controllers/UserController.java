@@ -6,12 +6,14 @@ import Entities.User;
 import Entities.UserValidation;
 import Interfaces.UserControllerInterface;
 import Interfaces.UserCreateViewInterface;
+import Interfaces.UserEditViewInterface;
 import Interfaces.UserListViewInterface;
 import Interfaces.UserModelInterface;
 import Schemas.UserSchema;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,21 +21,35 @@ public class UserController implements UserControllerInterface, ActionListener {
     private final UserModelInterface userModel;
     private final UserListViewInterface listaUsuarios;
     private final UserCreateViewInterface crearUsuarioView;
+    private final UserEditViewInterface editarUsuarioView;
     private final CustomDatabaseValidation databaseValidations;
     
-    public UserController(UserModelInterface userModel, UserListViewInterface listaUsuarios, UserCreateViewInterface crearUsuarioView, CustomDatabaseValidation dbValidations) {
+    public UserController(
+            UserModelInterface userModel,
+            UserListViewInterface listaUsuarios,
+            UserCreateViewInterface crearUsuarioView,
+            UserEditViewInterface editarUsuarioView,
+            CustomDatabaseValidation dbValidations
+    ) 
+    {
         this.userModel = userModel;
         this.listaUsuarios = listaUsuarios;
         this.crearUsuarioView = crearUsuarioView;
+        this.editarUsuarioView = editarUsuarioView;
         this.databaseValidations = dbValidations;
         
         this.listaUsuarios.getFilterButton().addActionListener(this);
         this.listaUsuarios.getDeleteFilterButton().addActionListener(this);
         this.listaUsuarios.getExitButton().addActionListener(this);
         this.listaUsuarios.getNewUserButton().addActionListener(this);
+        this.listaUsuarios.getTableMenuItemEditar().addActionListener(this);
+        this.listaUsuarios.getTableMenuItemEliminar().addActionListener(this);
         
         this.crearUsuarioView.getConfirmButton().addActionListener(this);
         this.crearUsuarioView.getCancelButton().addActionListener(this);
+        
+        this.editarUsuarioView.getConfirmButton().addActionListener(this);
+        this.editarUsuarioView.getCancelButton().addActionListener(this);
     }
     
     /**
@@ -81,6 +97,33 @@ public class UserController implements UserControllerInterface, ActionListener {
             this.create();
         }
         
+        // BOTÓN EDITAR EN LA TABLA DE LISTA DE USUARIOS
+        else if(e.getSource() == this.listaUsuarios.getTableMenuItemEditar()) {
+            int fila = this.listaUsuarios.getTabla().getSelectedRow();
+            
+            if(fila != -1) {
+                var id = this.listaUsuarios.getTabla().getValueAt(fila, 0);
+                var nombre = this.listaUsuarios.getTabla().getValueAt(fila, 1);
+                var apellidos = this.listaUsuarios.getTabla().getValueAt(fila, 2);
+                var email = this.listaUsuarios.getTabla().getValueAt(fila, 3);
+                var dni = this.listaUsuarios.getTabla().getValueAt(fila, 4);
+                
+                User userToEdit = new User();
+                userToEdit.setId(Integer.parseInt(id.toString()));
+                userToEdit.setNombre(nombre.toString());
+                userToEdit.setApellidos(apellidos.toString());
+                userToEdit.setEmail(email.toString());
+                userToEdit.setDni(dni.toString());
+                
+                this.edit(userToEdit);
+            }
+        }
+        
+        // BOTÓN ELIMINAR EN LA TABLA DE LISTA DE USUARIOS
+        else if(e.getSource() == this.listaUsuarios.getTableMenuItemEliminar()) {
+            
+        }
+        
         // BOTÓN GUARDAR NUEVO USUARIO PARA LA VISTA CREAR USUARIO
         else if (e.getSource() == this.crearUsuarioView.getConfirmButton()) {
             User user = new User();
@@ -88,7 +131,7 @@ public class UserController implements UserControllerInterface, ActionListener {
             user.setNombre(this.crearUsuarioView.getNombreTextField().getText());
             user.setApellidos(this.crearUsuarioView.getApellidosTextField().getText());
             user.setEmail(this.crearUsuarioView.getEmailTextField().getText());
-            user.setDni(this.crearUsuarioView.geDniTextField().getText());
+            user.setDni(this.crearUsuarioView.getDniTextField().getText());
             
             UserValidation userValidation = UserSchema.validate(user);
             
@@ -146,7 +189,7 @@ public class UserController implements UserControllerInterface, ActionListener {
                 this.crearUsuarioView.getNombreTextField().setText("");
                 this.crearUsuarioView.getApellidosTextField().setText("");
                 this.crearUsuarioView.getEmailTextField().setText("");
-                this.crearUsuarioView.geDniTextField().setText("");
+                this.crearUsuarioView.getDniTextField().setText("");
 
             } else {
                 JOptionPane.showConfirmDialog(
@@ -163,6 +206,90 @@ public class UserController implements UserControllerInterface, ActionListener {
         // BOTÓN CANCELAR CREAR USUARIO
         else if (e.getSource() == this.crearUsuarioView.getCancelButton()) {
             this.crearUsuarioView.exitView();
+        }
+        
+        // BOTÓN CONFIRMAR EDITAR USUARIO
+        else if(e.getSource() == this.editarUsuarioView.getConfirmButton()) {
+            User formerUser = this.editarUsuarioView.getUser();
+            
+            User updatedUser = new User();
+            updatedUser.setId(this.editarUsuarioView.getUser().getId());
+            updatedUser.setNombre(this.editarUsuarioView.getNombreTextField().getText());
+            updatedUser.setApellidos(this.editarUsuarioView.getApellidosTextField().getText());
+            updatedUser.setEmail(this.editarUsuarioView.getEmailTextField().getText());
+            updatedUser.setDni(this.editarUsuarioView.getDniTextField().getText());
+            
+            // VALIDACIÓN DEL SCHEMA
+            UserValidation userValidation = UserSchema.validate(updatedUser);
+            
+            if(!userValidation.getSuccess()) {
+                JOptionPane.showConfirmDialog(
+                    null,
+                    "Error en la validación. Errores: " + userValidation.getErrors().values(),
+                    "Respuesta",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.ERROR_MESSAGE,
+                    null
+                );
+                return;
+            }
+            
+            // VALIDACIÓN CON BASE DE DATOS
+            int conteoEmail = databaseValidations.repeatedValues("users", "email", updatedUser.getEmail());
+            int conteoDni = databaseValidations.repeatedValues("users", "dni", updatedUser.getDni());
+            
+            if(conteoEmail > 1 || (conteoEmail == 1 && !Objects.equals(updatedUser.getEmail(), formerUser.getEmail())) ) { // Seguro para valores null
+                JOptionPane.showConfirmDialog(
+                    null,
+                    "El campo email ya existe.",
+                    "Respuesta",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.ERROR_MESSAGE,
+                    null
+                );
+                return;
+            } else if(conteoDni > 1 || (conteoDni == 1 && !Objects.equals(updatedUser.getDni(), formerUser.getDni()))) {
+                JOptionPane.showConfirmDialog(
+                    null,
+                    "El campo dni ya existe.",
+                    "Respuesta",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.ERROR_MESSAGE,
+                    null
+                );
+                return;
+            }
+            
+            // ACTUALIZACIÓN
+            boolean resultado = this.update(updatedUser);
+            
+            if (resultado) {
+                JOptionPane.showConfirmDialog(
+                    null,
+                         "Usuario " + updatedUser.getNombre() + " " + updatedUser.getApellidos() + " actualizado con éxito.",
+                    "Respuesta",
+                    JOptionPane.DEFAULT_OPTION, // Botones para aceptar o cancelar. En este caso, sólo OK
+                    JOptionPane.INFORMATION_MESSAGE // Icono de info
+                );
+                
+                ArrayList<User> updatedUsers = this.list();
+                this.addDataTable(updatedUsers);
+
+            } else {
+                JOptionPane.showConfirmDialog(
+                    null,
+                    "Hubo un problema. Consulte con el administrador del sistema.",
+                    "Respuesta",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.ERROR_MESSAGE,
+                    null
+                );
+            }
+        }
+        
+        // BOTÓN CANCELAR EDITAR USUARIO
+        else if(e.getSource() == this.editarUsuarioView.getCancelButton()) {
+            this.editarUsuarioView.exitView();
         }
     }
     
@@ -252,11 +379,13 @@ public class UserController implements UserControllerInterface, ActionListener {
     }
     
     /**
-    * It creates the form to update a given user. (By id or passing all the user as Object)
+    * It creates the form to update a given user.(By id or passing all the user as Object)
+     * @param user The user to insert in form.
     */
     @Override
-    public void edit () {
-        
+    public void edit (User user) {
+        this.editarUsuarioView.setUserDataForm(user);
+        this.editarUsuarioView.setVisibleView(true);
     }
     
     /**
@@ -266,13 +395,14 @@ public class UserController implements UserControllerInterface, ActionListener {
     * @return If the user was updated or not.
     */
     @Override
-    public boolean update(int id, User user) {
+    public boolean update(User user) {
+        int id = user.getId();
         // SE COMPRUEBA PRIMERO QUE EXISTA EL USUARIO
         if (this.show(id) == null) {
             return false;
         }
-        
-        boolean respuesta = this.userModel.update(id, user);
+
+        boolean respuesta = this.userModel.update(user);
         return respuesta;
     }
     

@@ -4,6 +4,7 @@ import Database.Connection;
 import Database.Utilities.CustomDatabaseValidation;
 import Models.UserModel;
 import Views.CrearUsuarioView;
+import Views.EditarUsuarioView;
 import Views.ListaUsuarios;
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -20,9 +21,10 @@ public class SwingUsersCrud {
         UserModel userModel = new UserModel(connection);
         ListaUsuarios listaUsuarios = new ListaUsuarios();
         CrearUsuarioView crearNuevoUsuario = new CrearUsuarioView();
+        EditarUsuarioView editarUsuario = new EditarUsuarioView();
         CustomDatabaseValidation databaseValidation = new CustomDatabaseValidation(connection);
         
-        new UserController(userModel, listaUsuarios, crearNuevoUsuario, databaseValidation).index();
+        new UserController(userModel, listaUsuarios, crearNuevoUsuario, editarUsuario, databaseValidation).index();
         
     }
 }

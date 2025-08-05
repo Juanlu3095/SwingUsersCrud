@@ -22,4 +22,8 @@ public interface UserListViewInterface {
     public javax.swing.JButton getExitButton(); // Devuelve el botón para salir de la aplicación
     
     public javax.swing.JButton getNewUserButton(); // Devuelve el botón para crear un nuevo usuario.
+    
+    public javax.swing.JMenuItem getTableMenuItemEditar(); // Devuelve la opción 'Editar' de la tabla en la lista de usuarios.
+    
+    public javax.swing.JMenuItem getTableMenuItemEliminar(); // Devuelve la opción 'Eliminhar' de la tabla en la lista de usuarios.
 }

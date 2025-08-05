@@ -4,19 +4,21 @@
  */
 package Views;
 
-import Interfaces.UserCreateViewInterface;
+import Entities.User;
+import Interfaces.UserEditViewInterface;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class CrearUsuarioView extends javax.swing.JFrame implements UserCreateViewInterface {
+public class EditarUsuarioView extends javax.swing.JFrame implements UserEditViewInterface{
+    private User user;
 
     /**
-     * Creates new JFrame CrearUsuario
+     * Creates new form EditarUsuarioView
      */
-    public CrearUsuarioView() {
+    public EditarUsuarioView() {
         initComponents();
         
-        this.setTitle("Crear usuario");
+        this.setTitle("Editar usuario");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -30,6 +32,11 @@ public class CrearUsuarioView extends javax.swing.JFrame implements UserCreateVi
     @Override
     public void exitView() {
         this.dispose();
+    }
+    
+    @Override
+    public User getUser() {
+        return this.user;
     }
     
     @Override
@@ -55,6 +62,15 @@ public class CrearUsuarioView extends javax.swing.JFrame implements UserCreateVi
     @Override
     public JButton getConfirmButton() {
         return this.jButtonGuardar;
+    }
+    
+    @Override
+    public void setUserDataForm (User user) {
+        this.user = user;
+        this.jTextFieldNombre.setText(user.getNombre());
+        this.jTextFieldApellidos.setText(user.getApellidos());
+        this.jTextFieldEmail.setText(user.getEmail());
+        this.jTextFieldDni.setText(user.getDni());
     }
     
     @Override
@@ -85,14 +101,13 @@ public class CrearUsuarioView extends javax.swing.JFrame implements UserCreateVi
         jButtonCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(630, 548));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelTitulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Crear usuario");
+        jLabelTitulo.setText("Editar usuario");
 
         jLabelNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNombre.setForeground(new java.awt.Color(0, 0, 0));
@@ -238,21 +253,20 @@ public class CrearUsuarioView extends javax.swing.JFrame implements UserCreateVi
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditarUsuarioView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearUsuarioView().setVisible(true);
+                new EditarUsuarioView().setVisible(true);
             }
         });
     }

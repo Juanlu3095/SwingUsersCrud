@@ -31,9 +31,13 @@ Las vistas son las interfaces gráficas de la aplicación, las cuales usan Swing
 
 Las entidades representan los datos de la aplicación, como es el caso de los usuarios.
 
+### Interfaces
+
+Las interfaces nos permite abstraer las clases del de otros elementos de la aplicación definiendo un contrato y siguiendo las buenas prácticas.
+
 ### Base de datos (Carpeta Database)
 
-La carpeta database incluye principalmente la configuración para la conexión con la base de datos, la cual usará el modelo para realizar las consultas. También contiene la migración de la base de datos, la cual se usa para realizar los tests de forma más cómoda, y validaciones que requieren la base de datos.
+La carpeta database incluye principalmente la configuración para la conexión con la base de datos, la cual usará el modelo para realizar las consultas. También contiene la migración de la base de datos, la cual se usa para realizar los tests de forma más cómoda, y validaciones que requiere la base de datos.
 
 ### Utilidades
 

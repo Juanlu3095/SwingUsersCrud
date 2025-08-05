@@ -129,7 +129,6 @@ public class UserModel implements UserModelInterface {
         }
     }
 
-    // Función que usa el caballero del vídeo
     @Override
     public boolean update (User user) {
         try {
@@ -152,7 +151,6 @@ public class UserModel implements UserModelInterface {
         }
     }
     
-    // Función que YO utilizo
     @Override
     public boolean update (int id, User user) {
         try {

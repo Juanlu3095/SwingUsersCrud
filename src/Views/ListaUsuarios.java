@@ -3,6 +3,7 @@ package Views;
 
 import Interfaces.UserListViewInterface;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 
 public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInterface {
 
@@ -61,6 +62,16 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     public JButton getNewUserButton() {
         return this.ButtonNewUser;
     }
+    
+    @Override
+    public JMenuItem getTableMenuItemEditar () {
+        return this.jMenuItemEditar;
+    }
+    
+    @Override
+    public JMenuItem getTableMenuItemEliminar () {
+        return this.jMenuItemEliminar;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,6 +82,9 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuTabla = new javax.swing.JPopupMenu();
+        jMenuItemEditar = new javax.swing.JMenuItem();
+        jMenuItemEliminar = new javax.swing.JMenuItem();
         JPanelPrincipal = new javax.swing.JPanel();
         Aside = new javax.swing.JPanel();
         FilterTitle = new javax.swing.JLabel();
@@ -85,6 +99,12 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
         ButtonNewUser = new javax.swing.JButton();
         ButtonDeleteFilter = new javax.swing.JButton();
         ButtonExit = new javax.swing.JButton();
+
+        jMenuItemEditar.setText("Editar");
+        jPopupMenuTabla.add(jMenuItemEditar);
+
+        jMenuItemEliminar.setText("Eliminar");
+        jPopupMenuTabla.add(jMenuItemEliminar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +171,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tabla.setComponentPopupMenu(jPopupMenuTabla);
         jScrollPane1.setViewportView(Tabla);
 
         Buttons.setBackground(new java.awt.Color(255, 255, 255));
@@ -277,6 +298,9 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     private javax.swing.JComboBox<String> SelectedFilter;
     public javax.swing.JTable Tabla;
     private javax.swing.JLabel Title;
+    private javax.swing.JMenuItem jMenuItemEditar;
+    private javax.swing.JMenuItem jMenuItemEliminar;
+    private javax.swing.JPopupMenu jPopupMenuTabla;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
