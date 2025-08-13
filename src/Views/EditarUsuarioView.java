@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Views;
 
 import Entities.User;
@@ -13,7 +10,7 @@ public class EditarUsuarioView extends javax.swing.JFrame implements UserEditVie
     private User user;
 
     /**
-     * Creates new form EditarUsuarioView
+     * Creates new JFrame EditarUsuarioView
      */
     public EditarUsuarioView() {
         initComponents();

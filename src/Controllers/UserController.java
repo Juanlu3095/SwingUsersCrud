@@ -121,7 +121,37 @@ public class UserController implements UserControllerInterface, ActionListener {
         
         // BOTÓN ELIMINAR EN LA TABLA DE LISTA DE USUARIOS
         else if(e.getSource() == this.listaUsuarios.getTableMenuItemEliminar()) {
+            int fila = this.listaUsuarios.getTabla().getSelectedRow();
             
+            if(fila != -1) {
+                int id = Integer.parseInt(this.listaUsuarios.getTabla().getValueAt(fila, 0).toString());
+                String nombre = this.listaUsuarios.getTabla().getValueAt(fila, 1).toString();
+                String apellidos = this.listaUsuarios.getTabla().getValueAt(fila, 2).toString();
+                
+                boolean resultado = this.delete(id);
+                if(resultado) {
+                    JOptionPane.showConfirmDialog(
+                        null,
+                             "Usuario " + nombre + " " + apellidos + " eliminado con éxito.",
+                        "Respuesta",
+                        JOptionPane.DEFAULT_OPTION, // Botones para aceptar o cancelar. En este caso, sólo OK
+                        JOptionPane.INFORMATION_MESSAGE // Icono de info
+                    );
+                    ArrayList<User> updatedUsers = this.list();
+                    this.addDataTable(updatedUsers);
+                    
+                } else {
+                    JOptionPane.showConfirmDialog(
+                        null,
+                        "Usuario no encontrado.",
+                        "Respuesta",
+                        JOptionPane.DEFAULT_OPTION,
+                        JOptionPane.ERROR_MESSAGE,
+                        null
+                    );
+                    return;
+                }
+            }
         }
         
         // BOTÓN GUARDAR NUEVO USUARIO PARA LA VISTA CREAR USUARIO

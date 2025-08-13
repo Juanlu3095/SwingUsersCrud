@@ -16,6 +16,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
         this.setTitle("Lista de usuarios");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
     @Override
@@ -25,7 +26,7 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
     
     @Override
     public void exitView() {
-        this.dispose();
+        System.exit(0);
     }
     
     @Override
