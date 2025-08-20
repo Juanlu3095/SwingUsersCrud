@@ -25,11 +25,11 @@ public class UserController implements UserControllerInterface, ActionListener {
     private final CustomDatabaseValidation databaseValidations;
     
     public UserController(
-            UserModelInterface userModel,
-            UserListViewInterface listaUsuarios,
-            UserCreateViewInterface crearUsuarioView,
-            UserEditViewInterface editarUsuarioView,
-            CustomDatabaseValidation dbValidations
+        UserModelInterface userModel,
+        UserListViewInterface listaUsuarios,
+        UserCreateViewInterface crearUsuarioView,
+        UserEditViewInterface editarUsuarioView,
+        CustomDatabaseValidation dbValidations
     ) 
     {
         this.userModel = userModel;

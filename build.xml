@@ -19,6 +19,28 @@
         
         <echo>Dependencias descargadas correctamente.</echo>
     </target>
+    
+    <target name="clean" description="Borrar archivos de build">
+        <delete dir="build"/>
+    </target>
+    
+    <target name="compile" description="Compila la aplicación">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" includeantruntime="false" />
+    </target>
+    
+    <target name="migrate" depends="compile" description="Crea la base de datos y sus tablas">
+        <java classname="Database.Migrations.MysqlMigration" fork="true">
+            <classpath>
+                <!-- Localización de los .class -->
+                <pathelement location="build/classes"/>
+                <!-- Para las librerías descargadas-->
+                <fileset dir="lib">
+                    <include name="**/*.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
 
 </project>
 <!-- https://medium.com/recetario/construcci%C3%B3n-de-una-aplicaci%C3%B3n-en-java-e8be16fe46e3 -->

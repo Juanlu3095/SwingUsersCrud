@@ -1,8 +1,8 @@
 
 package Models;
 
-import Database.Connection;
 import Entities.User;
+import Interfaces.ConnectionInterface;
 import Interfaces.UserModelInterface;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserModel implements UserModelInterface {
-    private final Connection connection;
+    private final ConnectionInterface connection;
     
-    public UserModel (Connection connection) {
+    public UserModel (ConnectionInterface connection) {
         this.connection = connection; // Le pasamos la instancia de Connection directamente y no cada atributo de esa clase
     }
     
