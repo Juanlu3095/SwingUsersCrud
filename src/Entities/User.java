@@ -2,14 +2,21 @@
 package Entities;
 
 public class User {
-    int id;
-    String nombre;
-    String apellidos;
-    String email;
-    String dni;
+    private int id;
+    private String nombre;
+    private String apellidos;
+    private String email;
+    private String dni;
     
     public User (int id, String nombre, String apellidos, String email, String dni) {
         this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.dni = dni;
+    }
+    
+    public User (String nombre, String apellidos, String email, String dni) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
@@ -62,6 +69,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", dni=" + dni + '}';
+        return "User{" + "id=" + this.id + ", nombre=" + this.nombre + ", apellidos=" + this.apellidos + ", email=" + this.email + ", dni=" + this.dni + '}';
     }
 }
