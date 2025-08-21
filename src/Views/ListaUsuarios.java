@@ -179,20 +179,10 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
         Buttons.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         ButtonNewUser.setText("Nuevo");
-        ButtonNewUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonNewUserActionPerformed(evt);
-            }
-        });
 
         ButtonDeleteFilter.setText("Borrar filtros");
 
         ButtonExit.setText("Salir");
-        ButtonExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonExitActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout ButtonsLayout = new javax.swing.GroupLayout(Buttons);
         Buttons.setLayout(ButtonsLayout);
@@ -276,14 +266,6 @@ public class ListaUsuarios extends javax.swing.JFrame implements UserListViewInt
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonExitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonExitActionPerformed
-
-    private void ButtonNewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNewUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonNewUserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Aside;

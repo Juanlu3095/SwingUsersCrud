@@ -295,9 +295,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nuevo"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonNewUserActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="ButtonDeleteFilter">
                   <Properties>
@@ -308,9 +305,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Salir"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonExitActionPerformed"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
