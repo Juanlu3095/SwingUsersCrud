@@ -47,7 +47,7 @@ ant migrate
 Para crear valores en la base de datos:
 
 ```bash
-ant migrate
+ant seed
 ```
 
 ### Utilidades
