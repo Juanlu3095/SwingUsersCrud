@@ -11,7 +11,7 @@ public class MysqlSeed {
         String password = dotenv.get("DB_PASS");
         int port = Integer.parseInt(dotenv.get("DB_PORT"));
         String host = dotenv.get("DB_HOST");
-        String db = dotenv.get("DB_NAME_TEST");
+        String db = dotenv.get("DB_NAME");
         
         Connection connection = new Connection(user, password, port, host, db);
         UserSeeder userSeeder = new UserSeeder(connection);

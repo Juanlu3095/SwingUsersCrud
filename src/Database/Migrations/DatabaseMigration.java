@@ -36,7 +36,7 @@ public class DatabaseMigration {
         try {
             String query = "DROP DATABASE IF EXISTS " + this.database;
             PreparedStatement instruction = this.connectionDatabase.MysqlConnection().prepareStatement(query);
-            instruction.executeQuery();
+            instruction.executeUpdate();
             
             instruction.close();
             this.connectionDatabase.MysqlConnection().close();
